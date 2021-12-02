@@ -5,12 +5,27 @@ import (
 )
 
 func main() {
-	var weight float64 = 65.0
-	var tall float64 = 1.70
+	var name string
+	fmt.Print("姓名：")
+	fmt.Scanln(&name)
+
+	var weight float64
+	fmt.Print("体重（千克）：")
+	fmt.Scanln(&weight)
+
+	var tall float64
+	fmt.Print("身高（米）：")
+	fmt.Scanln(&tall)
 	var bmi float64 = weight / (tall * tall)
-	var age int = 35
+	var age int
+	fmt.Print("年龄：")
+	fmt.Scanln(&age)
+
 	var sexWeight int
 	var sex string = "男"
+	fmt.Print("性别（男/女）：")
+	fmt.Scanln(&sex)
+
 	if sex == "男" {
 		sexWeight = 1
 	} else {
