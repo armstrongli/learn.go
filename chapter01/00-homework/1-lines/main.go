@@ -6,29 +6,31 @@ import (
 
 func main() {
 	var p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y float64
-	fmt.Print("录入第1个点的x：")
-	fmt.Scanln(&p1x)
-	fmt.Print("录入第1个点的y：")
-	fmt.Scanln(&p1y)
+	p1x, p1y = getPointXYFromInput()
+	p2x, p2y = getPointXYFromInput()
+	p3x, p3y = getPointXYFromInput()
+	p4x, p4y = getPointXYFromInput()
 
-	fmt.Print("录入第2个点的x：")
-	fmt.Scanln(&p2x)
-	fmt.Print("录入第2个点的y：")
-	fmt.Scanln(&p2x)
+	k1 := calculateK(p2y, p1y, p2x, p1x)
+	k2 := calculateK(p4y, p3y, p4x, p3x)
 
-	fmt.Print("录入第3个点的x：")
-	fmt.Scanln(&p3x)
-	fmt.Print("录入第3个点的y：")
-	fmt.Scanln(&p3x)
+	getResult(k1, k2)
+}
 
-	fmt.Print("录入第4个点的x：")
-	fmt.Scanln(&p4x)
-	fmt.Print("录入第4个点的y：")
-	fmt.Scanln(&p4x)
+func getPointXYFromInput() (float64, float64) {
+	var x, y float64
+	fmt.Print("录入x：")
+	fmt.Scanln(&x)
+	fmt.Print("录入y：")
+	fmt.Scanln(&y)
+	return x, y
+}
 
-	k1 := (p2y - p1y) / (p2x - p1x)
-	k2 := (p4y - p3y) / (p4x - p3x)
+func calculateK(y2, y1, x2, x1 float64) float64 {
+	return (y2 - y1) / (x2 - x1)
+}
 
+func getResult(k1, k2 float64) {
 	if k1 == k2 {
 		fmt.Println("两条线平行")
 	} else {
