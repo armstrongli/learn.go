@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"runtime/debug"
 )
 
 func init() {
@@ -22,10 +23,21 @@ func init() {
 	fmt.Println("我是init函数--2")
 }
 
+func recoverMainBody() {
+	if re := recover(); re != nil {
+		fmt.Printf("warning: catch critical error: %v\n", re)
+		debug.PrintStack()
+	}
+}
+
 func mainFatRateBody() {
+	defer recoverMainBody() // 成功捕获
 	weight, tall, age, sexWeight, sex := getMaterialsFromInput()
 
 	fatRate := calcFatRate(weight, tall, age, sexWeight)
+	if fatRate <= 0 {
+		panic("fat rate is not allowed to be negative")
+	}
 
 	var checkHealthinessFunc func(age int, fatRate float64)
 	if sex == "男" {
