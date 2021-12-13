@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"runtime/debug"
+
+	"learn.go/chapter02/015.fatrate.refactor/calc"
 )
 
 func init() {
@@ -32,9 +34,9 @@ func recoverMainBody() {
 
 func mainFatRateBody() {
 	defer recoverMainBody() // 成功捕获
-	weight, tall, age, sexWeight, sex := getMaterialsFromInput()
+	weight, tall, age, _, sex := getMaterialsFromInput()
 
-	fatRate := calcFatRate(weight, tall, age, sexWeight)
+	fatRate := calcFatRate(weight, tall, age, sex)
 	if fatRate <= 0 {
 		panic("fat rate is not allowed to be negative")
 	}
@@ -106,10 +108,10 @@ func getHealthinessSuggestionsForFemale(age int, fatRate float64) {
 	}
 }
 
-func calcFatRate(weight float64, tall float64, age int, sexWeight int) float64 {
+func calcFatRate(weight float64, tall float64, age int, sex string) float64 {
 	// 计算体脂率
-	bmi := weight / (tall * tall)
-	fatRate := (1.2*bmi + 0.23*float64(age) - 5.4 - 10.8*float64(sexWeight)) / 100
+	bmi := calc.CalcBMI(tall, weight)
+	fatRate := calc.CalcFatRate(bmi, age, sex)
 	fmt.Println("体脂率是：", fatRate)
 	return fatRate
 }
