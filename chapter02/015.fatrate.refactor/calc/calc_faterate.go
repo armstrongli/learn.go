@@ -1,4 +1,4 @@
-package calc
+package calculator
 
 func CalcFatRate(bmi float64, age int, sex string) (fatRate float64) {
 	sexWeight := 0

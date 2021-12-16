@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"runtime/debug"
 
-	"learn.go/chapter02/015.fatrate.refactor/calc"
+	calc "learn.go/chapter02/015.fatrate.refactor/calc"
 )
 
 func init() {
