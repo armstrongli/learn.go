@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	learn_go_tools "learn.go.tools"
+	// learn_go_tools "learn.go.tools"
 	calculator "learn.go/chapter02/015.fatrate.refactor/calc"
 )
 
@@ -34,7 +34,7 @@ func main() {
 			fmt.Println("fatRate: ", fatRate)
 
 			// 评估结果
-			fmt.Println(learn_go_tools.Max(3, 5))
+			// fmt.Println(learn_go_tools.Max(3, 5))
 		},
 	}
 	cmd.Flags().StringVar(&name, "name", "", "姓名")
