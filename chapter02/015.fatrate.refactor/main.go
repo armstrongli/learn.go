@@ -36,7 +36,11 @@ func mainFatRateBody() {
 	defer recoverMainBody() // 成功捕获
 	weight, tall, age, _, sex := getMaterialsFromInput()
 
-	fatRate := calcFatRate(weight, tall, age, sex)
+	fatRate, err := calcFatRate(weight, tall, age, sex)
+	if err != nil {
+		fmt.Println("warning: 计算 体脂率 出错，不能再继续", err)
+		return
+	}
 	if fatRate <= 0 {
 		panic("fat rate is not allowed to be negative")
 	}
@@ -108,12 +112,16 @@ func getHealthinessSuggestionsForFemale(age int, fatRate float64) {
 	}
 }
 
-func calcFatRate(weight float64, tall float64, age int, sex string) float64 {
+func calcFatRate(weight float64, tall float64, age int, sex string) (fatRate float64, err error) {
 	// 计算体脂率
-	bmi := calc.CalcBMI(tall, weight)
-	fatRate := calc.CalcFatRate(bmi, age, sex)
+	bmi, err := calc.CalcBMI(tall, weight)
+	if err != nil {
+		return 0, err
+	}
+
+	fatRate = calc.CalcFatRate(bmi, age, sex)
 	fmt.Println("体脂率是：", fatRate)
-	return fatRate
+	return
 }
 
 func getMaterialsFromInput() (float64, float64, int, int, string) {
