@@ -29,7 +29,7 @@ func main() {
 			fmt.Println("weight: ", weight)
 			fmt.Println("age: ", age)
 			// 计算
-			bmi := calculator.CalcBMI(tall, weight)
+			bmi, _ := calculator.CalcBMI(tall, weight)
 			fatRate := calculator.CalcFatRate(bmi, age, sex)
 			fmt.Println("fatRate: ", fatRate)
 
