@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 )
 
 type Math = int
@@ -39,7 +40,12 @@ type voteGame struct {
 func (g *voteGame) goRun() *Leader {
 	// todo ....
 	for _, item := range g.students {
-		item.voteA(g.students[0]) // todo 用随机数代替
+		randInt := rand.Int()
+		if randInt%2 == 0 {
+			item.voteA(g.students[randInt%len(g.students)])
+		} else {
+			item.voteD(g.students[randInt%len(g.students)])
+		}
 	}
 
 	maxScore := -1
