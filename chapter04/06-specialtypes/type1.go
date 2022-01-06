@@ -15,6 +15,16 @@ func main() {
 	mathScore2 = mathScore
 	fmt.Println(mathScore2)
 	getScoresOfStudent("")
+
+	vg := &voteGame{students: []*student{
+		&student{name: fmt.Sprintf("%d", 1)},
+		&student{name: fmt.Sprintf("%d", 2)},
+		&student{name: fmt.Sprintf("%d", 3)},
+		&student{name: fmt.Sprintf("%d", 4)},
+		&student{name: fmt.Sprintf("%d", 5)},
+	}}
+	leader := vg.goRun()
+	fmt.Println(leader)
 }
 
 func getScoresOfStudent(name string) (Math, Chinese, English) {
@@ -49,6 +59,7 @@ func (g *voteGame) goRun() *Leader {
 type Leader = student
 
 type student struct {
+	name     string
 	agree    int
 	disagree int
 }
