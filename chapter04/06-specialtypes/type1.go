@@ -26,6 +26,14 @@ func main() {
 	}}
 	leader := vg.goRun()
 	fmt.Println(leader)
+	leader.Distribute()
+
+	var stdXQ = &student{name: "小强"}
+	var ldXQ Leader = Leader(*stdXQ)
+	ldXQ.Distribute()
+
+	// bytesTest1 := []byte{}
+	// var str1 string = string(bytesTest1)
 }
 
 func getScoresOfStudent(name string) (Math, Chinese, English) {
@@ -57,12 +65,27 @@ func (g *voteGame) goRun() *Leader {
 		}
 	}
 	if maxScoreIndex >= 0 { // 判断是否大于0，因为如果没有学生，那么index就是默认值-1.
-		return g.students[maxScoreIndex]
+		return (*Leader)(g.students[maxScoreIndex])
 	}
 	return nil
 }
 
-type Leader = student
+// 使用嵌套对象定义（继承）方式来定义班长
+// type Leader struct {
+// 	student
+// }
+
+// 使用类型重定义
+type Leader student
+
+func (l *Leader) Distribute() {
+	fmt.Println("发作业啦~~")
+}
+
+type FooooTestFuncRedefine []string // 类型可以是任意的
+
+func (f FooooTestFuncRedefine) test111() {
+}
 
 type student struct {
 	name     string
