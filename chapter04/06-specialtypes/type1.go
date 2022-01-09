@@ -1,8 +1,9 @@
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
-	"math/rand"
+	"math/big"
 )
 
 type Math = int
@@ -17,13 +18,10 @@ func main() {
 	fmt.Println(mathScore2)
 	getScoresOfStudent("")
 
-	vg := &voteGame{students: []*student{
-		&student{name: fmt.Sprintf("%d", 1)},
-		&student{name: fmt.Sprintf("%d", 2)},
-		&student{name: fmt.Sprintf("%d", 3)},
-		&student{name: fmt.Sprintf("%d", 4)},
-		&student{name: fmt.Sprintf("%d", 5)},
-	}}
+	vg := &voteGame{students: []*student{}}
+	for i := 0; i < 5; i++ {
+		vg.students = append(vg.students, &student{name: fmt.Sprintf("%d", i)})
+	}
 	leader := vg.goRun()
 	fmt.Println(leader)
 	leader.Distribute()
@@ -46,14 +44,11 @@ type voteGame struct {
 }
 
 func (g *voteGame) goRun() *Leader {
-	// todo ....
 	for _, item := range g.students {
-		randInt := rand.Int()
-		if randInt%2 == 0 {
-			item.voteA(g.students[randInt%len(g.students)])
-		} else {
-			item.voteD(g.students[randInt%len(g.students)])
-		}
+		RandomCrypto, _ := rand.Int(rand.Reader, big.NewInt(int64(len(g.students)-1)))
+		randInt := RandomCrypto.Int64()
+		fmt.Println("to:", randInt)
+		item.voteA(g.students[randInt])
 	}
 
 	maxScore := -1
