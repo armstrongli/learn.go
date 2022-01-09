@@ -1,8 +1,8 @@
 package main
 
 type Door interface {
-	// Unlock()
+	Unlock()
 	Open()
 	Close()
-	// Lock()
+	Lock()
 }
