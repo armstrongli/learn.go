@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 )
 
 func main() {
@@ -30,6 +31,14 @@ func main() {
 	fmt.Println(b, c)
 	c = b // 从范围小的向范围大的转会成功
 	// b = c // 从范围大的向范围小的转会失败
+
+	var i interface{}
+	i = 3
+	fmt.Println(reflect.TypeOf(i), "value:", i)
+	i = 3.2345
+	fmt.Println(reflect.TypeOf(i), "value:", i)
+	i = Refrigerator{}
+	fmt.Println(reflect.TypeOf(i), "value:", i)
 }
 
 type PutElephantIntoRefrigerator interface {
