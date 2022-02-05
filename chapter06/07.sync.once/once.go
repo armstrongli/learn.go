@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -45,7 +46,22 @@ func (MySqlDBFactory) GetConnection() *Conn {
 	return nil
 }
 
+var counter int = 0
+var counterOnce sync.Once
+
+type School struct {
+	classroomLocation map[string]string
+}
+
 func main() {
+	for i := 0; i < 10; i++ {
+		fmt.Println("第x次：", i)
+		counterOnce.Do(func() {
+			fmt.Println("初始化")
+			counter++
+		})
+	}
+	fmt.Println("最终结果：", counter)
 	// standard := []string{"asia"}
 	// for i := 0; i < 10; i++ {
 	// 	go func() {
