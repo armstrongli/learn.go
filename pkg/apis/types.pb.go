@@ -29,7 +29,7 @@ func (m *PersonalInformationList) Reset()         { *m = PersonalInformationList
 func (m *PersonalInformationList) String() string { return proto.CompactTextString(m) }
 func (*PersonalInformationList) ProtoMessage()    {}
 func (*PersonalInformationList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_a8d3011bd56b9fc7, []int{0}
+	return fileDescriptor_types_e4e3b2b0de83f2ec, []int{0}
 }
 func (m *PersonalInformationList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PersonalInformationList.Unmarshal(m, b)
@@ -57,11 +57,16 @@ func (m *PersonalInformationList) GetItems() []*PersonalInformation {
 }
 
 type PersonalInformation struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Sex                  string   `protobuf:"bytes,2,opt,name=sex,proto3" json:"sex,omitempty"`
-	Tall                 float32  `protobuf:"fixed32,3,opt,name=tall,proto3" json:"tall,omitempty"`
-	Weight               float32  `protobuf:"fixed32,4,opt,name=weight,proto3" json:"weight,omitempty"`
-	Age                  int64    `protobuf:"varint,5,opt,name=age,proto3" json:"age,omitempty"`
+	// @gotags: gorm:"column:name"
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty" gorm:"column:name"`
+	// @gotags: gorm:"column:sex"
+	Sex string `protobuf:"bytes,2,opt,name=sex,proto3" json:"sex,omitempty" gorm:"column:sex"`
+	// @gotags: gorm:"column:tall"
+	Tall float32 `protobuf:"fixed32,3,opt,name=tall,proto3" json:"tall,omitempty" gorm:"column:tall"`
+	// @gotags: gorm:"column:weight"
+	Weight float32 `protobuf:"fixed32,4,opt,name=weight,proto3" json:"weight,omitempty" gorm:"column:weight"`
+	// @gotags: gorm:"column:age"
+	Age                  int64    `protobuf:"varint,5,opt,name=age,proto3" json:"age,omitempty" gorm:"column:age"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -71,7 +76,7 @@ func (m *PersonalInformation) Reset()         { *m = PersonalInformation{} }
 func (m *PersonalInformation) String() string { return proto.CompactTextString(m) }
 func (*PersonalInformation) ProtoMessage()    {}
 func (*PersonalInformation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_a8d3011bd56b9fc7, []int{1}
+	return fileDescriptor_types_e4e3b2b0de83f2ec, []int{1}
 }
 func (m *PersonalInformation) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PersonalInformation.Unmarshal(m, b)
@@ -131,9 +136,9 @@ func init() {
 	proto.RegisterType((*PersonalInformation)(nil), "apis.PersonalInformation")
 }
 
-func init() { proto.RegisterFile("types.proto", fileDescriptor_types_a8d3011bd56b9fc7) }
+func init() { proto.RegisterFile("types.proto", fileDescriptor_types_e4e3b2b0de83f2ec) }
 
-var fileDescriptor_types_a8d3011bd56b9fc7 = []byte{
+var fileDescriptor_types_e4e3b2b0de83f2ec = []byte{
 	// 178 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x8f, 0xc1, 0xaa, 0xc2, 0x30,
 	0x10, 0x45, 0x49, 0xd3, 0x16, 0xde, 0x74, 0xf3, 0x88, 0xa0, 0x71, 0x17, 0xba, 0xca, 0xaa, 0x82,
