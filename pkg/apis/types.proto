@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package apis;
+
+message PersonalInformationList {
+  repeated PersonalInformation items = 1;
+}
+
+message PersonalInformation {
+  string name = 1;
+  string sex = 2;
+  float  tall = 3;
+  float weight = 4;
+  int64 age = 5;
+}
