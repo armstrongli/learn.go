@@ -8,3 +8,15 @@ package apis
 // 	Weight float64 `json:"weight"`
 // 	Age    int     `json:"age"`
 // }
+
+type PersonalInformationFatRate struct {
+	Name    string
+	FatRate float64
+}
+
+type PersonalRank struct {
+	Name       string
+	Sex        string
+	RankNumber int
+	FatRate    float64
+}
