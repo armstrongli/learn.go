@@ -10,3 +10,7 @@ type ServeInterface interface {
 	GetFatRate(name string) (*apis.PersonalRank, error)
 	GetTop() ([]*apis.PersonalRank, error)
 }
+
+type RankInitInterface interface {
+	Init() error
+}
