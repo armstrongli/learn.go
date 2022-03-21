@@ -6,6 +6,7 @@ require (
 	github.com/armstrongli/go-bmi v0.0.0-00010101000000-000000000000
 	github.com/ghodss/yaml v1.0.0
 	github.com/gin-contrib/pprof v1.3.0
+	github.com/gin-contrib/sessions v0.0.4
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gogo/protobuf v1.3.2
@@ -13,6 +14,9 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/json-iterator/go v1.1.12
 	github.com/spf13/cobra v1.3.0
+	go.etcd.io/etcd/client/v3 v3.5.2
+	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d
+	google.golang.org/grpc v1.42.0
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 	gorm.io/driver/mysql v1.3.2
 	gorm.io/gorm v1.23.2
