@@ -7,14 +7,16 @@ message PersonalInformationList {
 }
 
 message PersonalInformation {
+  // @gotags: gorm:"primaryKey;column:id"
+  int64 id = 1;
   // @gotags: gorm:"column:name"
-  string name = 1;
+  string name = 2;
   // @gotags: gorm:"column:sex"
-  string sex = 2;
+  string sex = 3;
   // @gotags: gorm:"column:tall"
-  float  tall = 3;
+  float  tall = 4;
   // @gotags: gorm:"column:weight"
-  float weight = 4;
+  float weight = 5;
   // @gotags: gorm:"column:age"
-  int64 age = 5;
+  int64 age = 6;
 }
