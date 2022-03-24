@@ -3,24 +3,39 @@ package main
 import (
 	"io"
 	"log"
-	"sync"
 
 	context2 "golang.org/x/net/context"
+	"learn.go/chapter13/02.grpc/server/frinterface"
 	"learn.go/pkg/apis"
 )
 
 var _ apis.RankServiceServer = &rankServer{}
 
 type rankServer struct {
-	sync.Mutex
-	persons  map[string]*apis.PersonalInformation
+	rankS    frinterface.ServeInterface
 	personCh chan *apis.PersonalInformation
 }
 
+func (r *rankServer) Update(context context2.Context, information *apis.PersonalInformation) (*apis.PersonalInformationFatRate, error) {
+	r.regPerson(information)
+	return r.rankS.UpdatePersonalInformation(information)
+}
+
+func (r *rankServer) GetFatRate(context context2.Context, information *apis.PersonalInformation) (*apis.PersonalRank, error) {
+	return r.rankS.GetFatRate(information.Name)
+}
+
+func (r *rankServer) GetTop(context context2.Context, null *apis.Null) (*apis.PersonalRanks, error) {
+	top, err := r.rankS.GetTop()
+	if err != nil {
+		log.Println("获取榜单时出错：", err)
+		return nil, err
+	}
+	return &apis.PersonalRanks{PersonalRanks: top}, nil
+}
+
 func (r *rankServer) regPerson(pi *apis.PersonalInformation) {
-	r.Lock()
-	defer r.Unlock()
-	r.persons[pi.Name] = pi
+	r.rankS.RegisterPersonalInformation(pi) // todo handle error
 	r.personCh <- pi
 }
 
