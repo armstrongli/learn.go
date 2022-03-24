@@ -45,7 +45,7 @@ func (r *FatRateRank) UpdatePersonalInformation(pi *apis.PersonalInformation) (*
 	r.inputRecord(pi.Name, pi.Sex, fr)
 	return &apis.PersonalInformationFatRate{
 		Name:    pi.Name,
-		FatRate: fr,
+		FatRate: float32(fr),
 	}, nil
 }
 
@@ -54,8 +54,8 @@ func (r *FatRateRank) GetFatRate(name string) (*apis.PersonalRank, error) {
 	return &apis.PersonalRank{
 		Name:       name,
 		Sex:        sex,
-		RankNumber: rankId,
-		FatRate:    fr,
+		RankNumber: int64(rankId),
+		FatRate:    float32(fr),
 	}, nil
 }
 
@@ -139,8 +139,8 @@ func (r *FatRateRank) getRankTop() []*apis.PersonalRank {
 		out = append(out, &apis.PersonalRank{
 			Name:       item.Name,
 			Sex:        item.Sex,
-			RankNumber: i,
-			FatRate:    item.FatRate,
+			RankNumber: int64(i),
+			FatRate:    float32(item.FatRate),
 		})
 	}
 	return out
