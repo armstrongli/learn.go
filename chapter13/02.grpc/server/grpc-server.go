@@ -23,7 +23,8 @@ func startGRPCServer(ctx context.Context) {
 	}
 	s := grpc.NewServer([]grpc.ServerOption{}...)
 	apis.RegisterRankServiceServer(s, &rankServer{
-		persons: map[string]*apis.PersonalInformation{},
+		persons:  map[string]*apis.PersonalInformation{},
+		personCh: make(chan *apis.PersonalInformation),
 	})
 	go func() {
 		select {

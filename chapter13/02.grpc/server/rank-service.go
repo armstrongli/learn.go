@@ -13,7 +13,25 @@ var _ apis.RankServiceServer = &rankServer{}
 
 type rankServer struct {
 	sync.Mutex
-	persons map[string]*apis.PersonalInformation
+	persons  map[string]*apis.PersonalInformation
+	personCh chan *apis.PersonalInformation
+}
+
+func (r *rankServer) regPerson(pi *apis.PersonalInformation) {
+	r.Lock()
+	defer r.Unlock()
+	r.persons[pi.Name] = pi
+	r.personCh <- pi
+}
+
+func (r *rankServer) WatchPersons(null *apis.Null, server apis.RankService_WatchPersonsServer) error {
+	for pi := range r.personCh {
+		if err := server.Send(pi); err != nil {
+			log.Println("发送失败，结束:", err)
+			return err
+		}
+	}
+	return nil
 }
 
 func (r *rankServer) RegisterPersons(server apis.RankService_RegisterPersonsServer) error {
@@ -28,18 +46,14 @@ func (r *rankServer) RegisterPersons(server apis.RankService_RegisterPersonsServ
 			return err
 		}
 		pis.Items = append(pis.Items, pi)
-		r.Lock()
-		r.persons[pi.Name] = pi
-		r.Unlock()
+		r.regPerson(pi)
 	}
 	log.Println("连续得到注册清单：", pis.String())
 	return server.SendAndClose(pis)
 }
 
 func (r *rankServer) Register(context context2.Context, information *apis.PersonalInformation) (*apis.PersonalInformation, error) {
-	r.Lock()
-	defer r.Unlock()
-	r.persons[information.Name] = information
+	r.regPerson(information)
 	log.Printf("收到新注册人：%s\n", information.String())
 	return information, nil
 }
