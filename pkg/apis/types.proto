@@ -4,11 +4,31 @@ package apis;
 
 service RankService {
   rpc Register(PersonalInformation) returns (PersonalInformation){}
+  rpc Update(PersonalInformation) returns (PersonalInformationFatRate){}
+  rpc GetFatRate(PersonalInformation) returns (PersonalRank){}
+  rpc GetTop(null) returns (PersonalRanks){}
+
   rpc RegisterPersons(stream PersonalInformation) returns (PersonalInformationList){}
   rpc WatchPersons(null)returns (stream PersonalInformation){}
 }
 
 message null {}
+
+message PersonalRanks {
+  repeated PersonalRank personalRanks = 1;
+}
+
+message PersonalRank{
+  string name = 1;
+  string sex = 2;
+  int64 rankNumber = 3;
+  float fatRate = 4;
+}
+
+message PersonalInformationFatRate {
+  string name = 1 ;
+  float fatRate = 2;
+}
 
 message PersonalInformationList {
   repeated PersonalInformation items = 1;
