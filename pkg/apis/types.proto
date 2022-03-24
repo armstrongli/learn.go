@@ -4,7 +4,11 @@ package apis;
 
 service RankService {
   rpc Register(PersonalInformation) returns (PersonalInformation){}
+  rpc RegisterPersons(stream PersonalInformation) returns (PersonalInformationList){}
+//  rpc WatchPersons(null)returns (stream PersonalInformation){}
 }
+
+//message null {}
 
 message PersonalInformationList {
   repeated PersonalInformation items = 1;
