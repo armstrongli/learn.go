@@ -1,0 +1,2 @@
+from ubuntu:20.04
+run echo "hello"
